@@ -1,0 +1,29 @@
+version: '3.8'
+volumes:
+  postgres:
+services:
+  app:
+    container_name: fastapi_container
+    build:
+      context: .
+      dockerfile: environment/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+    restart: always
+  postgres:
+    container_name: postgres_container
+    image: postgres:13.3-buster
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_DB: ${POSTGRES_DB:-testbd}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
