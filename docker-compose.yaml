@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-root}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
-      POSTGRES_DB: ${POSTGRES_DB:-testbd}
+      POSTGRES_DB: ${POSTGRES_DB:-todolistdb}
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
