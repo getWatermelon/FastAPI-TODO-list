@@ -13,6 +13,6 @@ todo_model = Table(
     Column('title', String(256), nullable=False),
     Column('order', Integer, nullable=False),
     Column('description', Text),
-    Column('created_at', DateTime, default=datetime.utcnow),
-    Column('updated_at', DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    Column('created_at', DateTime, default=datetime.now()),
+    Column('updated_at', DateTime, default=datetime.now(), onupdate=datetime.now())
 )
