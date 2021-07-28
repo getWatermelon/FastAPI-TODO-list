@@ -14,7 +14,8 @@ COPY ../poetry.lock /app/poetry.lock
 RUN poetry config virtualenvs.create false \
   && poetry install
 
+RUN poetry install
+
 COPY .. /app
 
-#CMD poetry run uvicorn app.main:app --host 0.0.0.0 --reload --log-level debug
-CMD poetry run python app/main.py
+CMD poetry run uvicorn app:app --host 0.0.0.0 --reload --log-level debug

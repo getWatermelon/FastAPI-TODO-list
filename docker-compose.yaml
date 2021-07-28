@@ -18,8 +18,8 @@ services:
     container_name: postgres_container
     image: postgres:13.3-buster
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-root}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-todolistdb}
       PGDATA: /data/postgres
     volumes:
