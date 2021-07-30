@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from app.db import database
 
-app = FastAPI()
+from app.api.routes import todo
 
+app = FastAPI(
+    title=f"TODO-list Rest API",
+    description=f"Simple API for TODO-list",
+)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+app.include_router(todo.router)
 
 
 @app.on_event("startup")
