@@ -9,7 +9,6 @@ EXPOSE 8000
 RUN pip install poetry==1.1.7
 
 COPY ../pyproject.toml /app/pyproject.toml
-COPY ../poetry.lock /app/poetry.lock
 
 RUN poetry config virtualenvs.create false \
   && poetry install
