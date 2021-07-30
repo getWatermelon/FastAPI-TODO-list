@@ -1,4 +1,5 @@
-from .base import (
+from app.db.models import todos
+from app.db.base import (
     metadata,
     engine,
     database
