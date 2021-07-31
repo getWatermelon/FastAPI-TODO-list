@@ -13,8 +13,6 @@ COPY ../pyproject.toml /app/pyproject.toml
 RUN poetry config virtualenvs.create false \
   && poetry install
 
-RUN poetry install
-
 COPY .. /app
 
 CMD poetry run uvicorn app:app --host 0.0.0.0 --reload --log-level debug
