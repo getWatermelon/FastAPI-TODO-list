@@ -14,7 +14,8 @@ class CRUDTodo(CRUDDatabase):
         query = (todos.select()
                  .order_by(
                     asc(todos.c.order),
-                    desc(todos.c.updated_at)))
+                    desc(todos.c.updated_at))
+                 .limit(100))
 
         todos_list = [Todo(**todo) for todo in await self.database.fetch_all(query=query)]
 
