@@ -8,11 +8,9 @@ EXPOSE 8000
 
 RUN pip install poetry==1.1.7
 
-COPY ../pyproject.toml /app/pyproject.toml
+COPY .. /app
 
 RUN poetry config virtualenvs.create false \
   && poetry install
-
-COPY .. /app
 
 CMD poetry run uvicorn app:app --host 0.0.0.0 --reload --log-level debug
