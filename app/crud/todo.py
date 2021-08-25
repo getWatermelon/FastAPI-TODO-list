@@ -25,6 +25,7 @@ class CRUDTodo(CRUDDatabase):
     async def get_one_by_id(self, id: int) -> Union[Todo, None]:
         query = todos.select().where(todos.c.id == id)
         todo = await self.database.fetch_one(query=query)
+
         if not todo:
             return None
 
