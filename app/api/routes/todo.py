@@ -18,7 +18,6 @@ async def get_all_todos(todos: CRUDTodo = Depends(get_database)):
 @router.get("/todo/{id}", response_model=Todo, status_code=status.HTTP_200_OK, tags=["TODO"])
 async def get_todo_by_id(id: int, todos: CRUDTodo = Depends(get_database)):
     todo = await todos.get_one_by_id(id)
-
     if not todo:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
