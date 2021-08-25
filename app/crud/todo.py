@@ -9,23 +9,23 @@ from app.schemas import Todo, TodoIn
 
 
 class CRUDTodo(CRUDDatabase):
-
     async def get_all(self) -> List[Todo]:
-        query = (todos.select()
-                 .order_by(
-                    asc(todos.c.order),
-                    desc(todos.c.updated_at))
-                 .limit(100))
+        query = (
+            todos.select()
+            .order_by(asc(todos.c.order), desc(todos.c.updated_at))
+            .limit(100)
+        )
 
-        todos_list = [Todo(**todo) for todo in await self.database.fetch_all(query=query)]
+        todos_list = [
+            Todo(**todo) for todo in await self.database.fetch_all(query=query)
+        ]
 
         return todos_list
 
     async def get_one_by_id(self, id: int) -> Union[Todo, None]:
-        query = (todos.select()
-                 .where(todos.c.id == id))
-
+        query = todos.select().where(todos.c.id == id)
         todo = await self.database.fetch_one(query=query)
+
         if not todo:
             return None
 
@@ -39,7 +39,7 @@ class CRUDTodo(CRUDDatabase):
             order=todo.order,
             description=todo.description,
             created_at=current_time,
-            updated_at=current_time
+            updated_at=current_time,
         )
 
         query = todos.insert().values(**new_todo)
@@ -55,12 +55,10 @@ class CRUDTodo(CRUDDatabase):
             title=todo_in.title,
             order=todo_in.order,
             description=todo_in.description,
-            updated_at=update_time
+            updated_at=update_time,
         )
 
-        query = (todos.update()
-                 .where(todos.c.id == id)
-                 .values(**todo))
+        query = todos.update().where(todos.c.id == id).values(**todo)
 
         await self.database.fetch_one(query=query)
 
